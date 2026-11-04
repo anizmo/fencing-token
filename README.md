@@ -256,7 +256,7 @@ Copy this into your design review. If you cannot tick a box, write down why.
 
 ## Weekly updates
 
-New resources, incidents, and tools are added every week. See the [`weekly/`](weekly/) folder for each week's log, or follow the **Fencing Token** newsletter on LinkedIn.
+New resources, incidents, and tools are added every week. See the [`weekly/`](weekly/) folder for each week's log, or [subscribe to the **Fencing Token** newsletter on LinkedIn](https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7523585585391788032).
 
 ## Contributing
 
