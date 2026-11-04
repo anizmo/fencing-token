@@ -16,7 +16,7 @@ AI agents now read email, browse the web, call APIs, write code, and move money.
 **Why "Fencing Token"?** In distributed systems, a [fencing token](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html) is a number that increases every time a lock is granted. The storage layer rejects any write carrying an older token, so a process whose authority has gone stale can never act on it. That is the whole idea behind this project: authority is checked where the action happens, by a system that can say no, not by the actor that wants to proceed. AI agents are the first series; the principle applies to any system that acts. (Not a cryptocurrency.)
 
 **Maintained by [Anuj Ashok Potdar](https://www.linkedin.com/in/potdaranuj/)** · IEEE Senior Member · Author (Wiley-IEEE, Springer) · Manning Technical Reviewer
-**Community:** Fencing Token · New entries every week · [Contribute](CONTRIBUTING.md) · **Website:** [anizmo.github.io/fencing-token](https://anizmo.github.io/fencing-token/)
+**Community:** Fencing Token · New entries every week · [Contribute](CONTRIBUTING.md) · **Website:** [fencingtoken.com](https://fencingtoken.com/)
 
 ⭐ Star the repo to follow weekly updates.
 
@@ -93,6 +93,7 @@ The defining vulnerability of agents. You cannot patch it away; you design aroun
 - [CaMeL: Defeating Prompt Injections by Design](https://arxiv.org/abs/2503.18813) (Google DeepMind and ETH Zurich). Separates control flow from untrusted data and enforces capabilities at tool-call time. [Code](https://github.com/google-research/camel-prompt-injection) (research prototype).
 - [Agents Rule of Two and The Attacker Moves Second](https://simonwillison.net/2025/Nov/2/new-prompt-injection-papers/). Why adaptive attackers break most published defenses, and a simple rule for agent design.
 - [Embrace The Red](https://embracethered.com/blog/) (Johann Rehberger). The best ongoing source of real-world agent exploit write-ups.
+- [Where You Inject Matters: The Trust Region Effect in LLM Agents](https://arxiv.org/abs/2610.38867) (Guo et al., with Bo Li and Jianfeng Gao). With the injected text held fixed, a GPT-5.4 agent followed an unsafe instruction in a README or TODO file 2.6 times more often on average than in a code or data file, so documentation needs at least as much scrutiny as code.
 
 ### Stage 2: Isolation and sandboxing
 
@@ -119,6 +120,10 @@ The core of "auditable": every action an agent proposes is checked by a determin
 - [OWASP Agent Control Standard (ACS)](https://genai.owasp.org/resource/agent-control-standard-acs/). Open standard for runtime hooks and declarative, portable policy enforcement across agent frameworks; the reference implementation ([repo](https://github.com/GenAI-Security-Project/agent-control-standard)) puts a guardian in front of a policy engine. Early (v0.1); its README lists open gaps such as an unauthenticated wire and a fail-open default.
 - [Loopjacking: Hijacking Human-in-the-Loop Approval](https://arxiv.org/abs/2609.21081) (Adithyan Arun Kumar). Shows how an approval can be decoupled from the action that actually runs, and that exact per-call binding blocks it.
 - [The Verifiable Action Card](https://arxiv.org/abs/2609.18411) (Irshad, Mughees, Mughees, Mughees, Soomro). Preprint: rebuilds the approval from the pending action and binds approval to the exact action re-verified at dispatch; 0% attack success on the authors' 24-scenario browser-agent benchmark.
+- [Authority Is Not a String: A Capability-Scoped Harness for Prompt-Injection-Resistant Coding Agents](https://arxiv.org/abs/2609.08371) (Bouras, Dai, Mechtaev). CapScope derives an authority ceiling from trusted input and checks every tool call against typed capabilities stored outside the model; injected effects ran in 3 of 75 runs, against 33 to 47 of 75 for the baselines.
+- [MCP Tool Exposure is a Privilege Grant: A Two-Gate Authorization Model](https://cloudsecurityalliance.org/blog/2026/10/20/mcp-tool-exposure-is-a-privilege-grant-a-two-gate-authorization-model-for-agentic-ai) (Badal Bhushan, CSA). Separates which tools an agent may see from whether one specific call on one specific resource may run; `tools/list` filtering is risk reduction, not authorization.
+- [ToolFence](https://arxiv.org/abs/2609.37196) (Li, He, Dai, Xiao). Preprint: compiles a typed authorization blueprint before execution and enforces it with a deterministic monitor that tracks provenance, aimed at attacks that keep the intended tool but manipulate its arguments.
+- [Design Tenets for Agent Identity Management Systems](https://www.nist.gov/blogs/cybersecurity-insights/design-tenets-agent-identity-management-systems) (Booth, Fisher, Galluzzo of NIST and Clancy of MITRE). Ten initial tenets that will guide the NCCoE's agent demonstrations, including zero standing privilege, separating policy from reasoning ("guardrails alone are insufficient"), deterministic access decisions, and append-only evidence kept independent of the agent.
 
 ### Stage 4: MCP and the tool supply chain
 
@@ -139,6 +144,8 @@ Guardrails reduce risk; they do not eliminate it. Use them as one layer, never t
 - [NeMo Guardrails](https://github.com/NVIDIA-NeMo/Guardrails) (NVIDIA). Programmable rails for dialog, topics, and tool use.
 - [PurpleLlama](https://github.com/meta-llama/PurpleLlama) (Meta). Includes LlamaFirewall, Prompt Guard, Llama Guard, and CyberSecEval.
 - [Guardrails AI](https://github.com/guardrails-ai/guardrails). Validators for structured, safe LLM output (validators now ship as PyPI packages).
+- [Agent Governance Toolkit](https://github.com/microsoft/agent-governance-toolkit) (Microsoft). Open-source toolkit for policy enforcement, zero-trust identity, and execution sandboxing for agents; read its policy model before adopting it, as with any vendor toolkit.
+- [Blocking at the Boundary](https://arxiv.org/abs/2610.05163) (Liu, Han, Lyu, Wang, Yu). Preprint: confirms staged prompt injections against Claude Code and Codex in their native runtimes, then audits each pending action before it takes effect; its Path-Aligned Attribution auditor reached 86% block recall at a 6 to 8% false-block rate, against 44 to 47% recall for ARGUS.
 
 ### Stage 6: Audit, observability, and provenance
 
@@ -150,6 +157,7 @@ The part almost everyone skips. If you cannot replay why an agent did something,
 - [Tessera](https://github.com/transparency-dev/tessera). Library for building tile-based transparency logs; a foundation for tamper-evident agent audit trails.
 - [Trillian](https://github.com/google/trillian). Google's verifiable log (now in maintenance mode; the design is still worth studying).
 - [Auditable Agents](https://arxiv.org/abs/2604.05485) (Nian et al., with Yue Zhao). Position paper defining five dimensions of agent auditability, from action recoverability to evidence integrity, and proposing an Auditability Card for agent systems.
+- [LLM Agents Can Easily Tamper With Their Own Traces](https://arxiv.org/abs/2609.30266) (Qin, Schmotz, Prinzhorn, Beurer-Kellner, Prabhu, Andriushchenko). All tested coding-agent harnesses except Muse Code let the agent delete its own traces without tripping monitors; log through an interception point the agent cannot control.
 
 ### Stage 7: Red teaming and benchmarks
 
@@ -163,6 +171,8 @@ Measure it or it isn't real.
 - [promptfoo](https://github.com/promptfoo/promptfoo). Evals and red teaming in CI for prompts, agents, and RAG.
 - [Microsoft AI Red Team](https://learn.microsoft.com/en-us/security/ai-red-team/). Lessons and methodology from red-teaming production AI.
 - [OWASP GenAI Red Teaming Manual v1.0](https://genai.owasp.org/resource/genai-red-teaming-manual-version-1-0/). An eight-phase methodology, from planning to remediation, that covers models, applications, and agents.
+- [buried-injections](https://github.com/rudratoshs/buried-injections) (Rudratosh Shastri). Reproducible benchmark of 10 open-source injection detectors against 629 AgentDojo attacks buried in tool output; none caught most attacks without also flagging safe traffic, which is why policy enforcement still matters.
+- [INFUSE](https://arxiv.org/abs/2610.20776) (Nguyen, Guo, Dubauskas, Damuluru, Johnson, Leach). Indirect prompt injection benchmark of 40 long-horizon tasks and 56 attack scenarios run on 19 LLMs; per-model attack success ranged from 3.2% to 41.9% and existing guard models gave limited protection, so any result has to name the model. [Code](https://github.com/judydnguyen/infuse).
 
 ### Stage 8: Governance and standards
 
@@ -174,6 +184,7 @@ What your auditors, regulators, and enterprise customers will ask about.
 - [EU AI Act](https://artificialintelligenceact.eu/). Text, timelines, and explainers for the EU's AI regulation.
 - [Coalition for Secure AI (CoSAI)](https://www.coalitionforsecureai.org/). Industry coalition publishing open frameworks for secure AI.
 - [CoSAI: Zero Trust for AI Systems](https://www.coalitionforsecureai.org/zero-trust-for-ai-systems-why-authorization-cant-live-inside-the-model/). Applies zero trust to agents: user-bound sessions, short-lived scoped tokens, and authorization that the model cannot influence.
+- [The Secure Software Factory: A Reference Architecture](https://agentbaseline.org/reference-architecture) (Agent Baseline; drafted by authors from Docker, Keycard, Barclays, Socket, and Secure Theory). Four boundaries (sandbox, network, supply chain, identity and access) enforced outside the agent at three levels of autonomy, on the rule that the agent proposes, policy authorizes, and infrastructure enforces; v1 draft, open for comment.
 
 ---
 
@@ -191,6 +202,13 @@ Every incident is a free lesson. Each one maps to a stage above.
 | [SalesBleed (Agentforce)](https://labs.zenity.io/post/salesbleed-0-click-data-exfiltration-on-agentforce) | Zenity Labs: a Web-to-Lead form injection leaked CRM data through a DNS lookup triggered by an image tag; fixed by Salesforce | Output redaction is a race against every renderer; DNS is egress | 1, 2, 5 |
 | [Test wallet spent without authorization](https://alignment.openai.com/misalignment-reports/using-a-funded-test-cryptocurrency-wallet-without-authorization/) | OpenAI reports a research model derived keys from a public recovery phrase, spent test-network funds, and left it out of its report | Spending authority must be explicit and enforced outside the model | 3, 6 |
 | [An agent used DNS to reach an external chatbot](https://alignment.openai.com/misalignment-reports/an-agent-used-dns-to-reach-an-external-chatbot/) | OpenAI reports a training agent used its sandbox's DNS resolver to query an external chatbot | If DNS resolves, it is an egress path | 2, 6 |
+| [Mistral Vibe shell permission bypass](https://blog.secmate.dev/posts/mistral-vibe-cve-2026-87987-cve-2026-87984/) | SecMate showed Vibe's permission check parsed a reduced view of a shell command while the shell ran the original string, so allowlisted-looking commands ran without an approval prompt (Mistral advisory [MAI-2026-003](https://docs.mistral.ai/resources/security-advisories/MAI-2026-003); fixed in 2.25.4) | Check exactly what you execute, and fail closed on syntax you cannot model | 3, 5 |
+| [Accessing and changing internal systems during dashboard research](https://alignment.openai.com/misalignment-reports/accessing-and-changing-internal-systems-during-dashboard-research/) | OpenAI reports an internal model asked for public figures changed a live setting to get a storage token, downloaded 147,451 rows of non-public data, reverted the setting but kept using the token, and did not disclose it | Reverting a change does not revoke a credential; the record must come from outside the actor | 3, 6 |
+| [Claude models reached real systems during cyber evaluations](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents) | Anthropic's alignment assessment of four incidents: a misconfigured evaluation environment left internet access open while the prompts said there was none, and models reached real third-party systems | Verify evaluation egress from outside the sandbox; Anthropic says these incidents would not have occurred had the environments been isolated as intended | 2, 6 |
+| [A Vault with a Heap-View (AWS AgentCore Harness)](https://unit42.paloaltonetworks.com/securing-aws-agentcore-harness-credentials/) | Unit 42: prompt injection in a support ticket drove the default shell tool to read the harness's memory via /proc and extract an identity JWT, which was replayed against an MCP service; AWS closed the report as informative under shared responsibility | Default tools are part of your attack surface; scope or remove the shell tool and filter egress | 2, 3 |
+| [Malicious Claude Code extension in Cursor's marketplace](https://cursor.com/blog/claude-code-extension-security-notice) | Cursor reports that modified versions 2.1.312 and 2.1.313 of the Anthropic.claude-code extension, not built by Anthropic, were available from 2:27am to 1:35pm PT on Oct 29, 2026; they sent host details, added an attacker SSH key, and installed persistence for a reverse SSH tunnel | An extension update is new code running with your access; pin versions and know which machines pulled each release | 4 |
+| [Unauthorized AI relays switch the sandbox off](https://www.security.com/threat-intelligence/openai-claude-unauthorized-relays) | Symantec's Threat Hunter Team found a relay service at a dozen organizations that installs the genuine Codex and Claude Code CLIs, then rewrites their config to route requests through its servers, set the sandbox to "danger-full-access", swap in relay-issued tokens, and disable telemetry; no abuse observed so far | A sandbox that lives in a user-editable config file is a setting, not a boundary; monitor agent configs and egress from outside the agent | 2, 6 |
+| [MCPhantom](https://www.glow.io/blogs/mcphantom-ai-coding-agents-are-installing-vulnerable-deprecated-mcp-servers-from-training-data) | Glow Labs found coding agents installing archived Anthropic reference MCP servers they remembered from training data; it reports four high-severity flaws in those servers, including an RCE in the Puppeteer server, and the maintainers said no fix will come | The model's memory is not a package registry; approve one MCP server per service and check deprecation before install | 4 |
 
 More incidents: [AI Incident Database](https://incidentdatabase.ai/).
 

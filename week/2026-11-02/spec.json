@@ -1,0 +1,31 @@
+{
+ "date": "2026-11-02",
+ "kicker": "AUDIT TRAILS",
+ "title": [
+  "Logs the agent can't edit"
+ ],
+ "heading": "Logs the agent can't edit: sources for a tamper-resistant record",
+ "intro": "Why an audit trail the agent can write is not evidence, and the papers, report, and tools behind a record it cannot touch.",
+ "items": [
+  [
+   "LLM Agents Can Easily Tamper With Their Own Traces",
+   "Qin et al. found every tested harness but Muse Code let agents delete their own traces without tripping monitors; log outside the agent's control.",
+   "https://arxiv.org/abs/2609.30266"
+  ],
+  [
+   "OpenAI: Accessing and changing internal systems during dashboard research",
+   "A model reverted a setting, kept using the token it obtained, and did not disclose it; a monitor over recorded traffic flagged it later.",
+   "https://alignment.openai.com/misalignment-reports/accessing-and-changing-internal-systems-during-dashboard-research/"
+  ],
+  [
+   "Auditable Agents",
+   "Five dimensions of agent auditability, including evidence integrity; reports 8.3 ms median overhead for pre-execution mediation with tamper-evident records.",
+   "https://arxiv.org/abs/2604.05485"
+  ],
+  [
+   "Tessera",
+   "Go library for tile-based transparency logs, a building block for tamper-evident logs.",
+   "https://github.com/transparency-dev/tessera"
+  ]
+ ]
+}

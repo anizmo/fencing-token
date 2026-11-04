@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logs the agent can&#x27;t edit: sources for a tamper-resistant record | Fencing Token</title>
+<meta name="description" content="Why an audit trail the agent can write is not evidence, and the papers, report, and tools behind a record it cannot touch.">
+<meta name="author" content="Anuj Ashok Potdar">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://fencingtoken.com/week/2026-11-02/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Fencing Token">
+<meta property="og:title" content="Logs the agent can&#x27;t edit: sources for a tamper-resistant record | Fencing Token">
+<meta property="og:description" content="Why an audit trail the agent can write is not evidence, and the papers, report, and tools behind a record it cannot touch.">
+<meta property="og:url" content="https://fencingtoken.com/week/2026-11-02/">
+<meta property="og:image" content="https://fencingtoken.com/week/2026-11-02/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fencingtoken.com/week/2026-11-02/og.png">
+<meta name="theme-color" content="#0D1B2A">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/mark-app-icon-180-apple-touch.png">
+<link rel="alternate" type="application/atom+xml" title="Fencing Token updates" href="/feed.xml">
+<link rel="preload" href="/assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Fencing Token home"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="19" width="30" height="3" rx="1.2" fill="#8A97A8"/><path fill="#8A97A8" d="M2 17.5 5 14.5 8 17.5V29H2Z"/><path fill="#6E7D92" d="M9.5 14 12.5 11 15.5 14V29h-6Z"/><path style="fill:var(--ink-2)" d="M17 10 20 7 23 10V29h-6Z"/><path fill="#F4A62A" d="M24.5 6 27.5 3 30.5 6V29h-6Z"/></svg><span class="wordmark">fencing <b>token</b></span></a>
+    <nav class="nav" aria-label="Primary"><a href="/#roadmap">Roadmap</a><a href="/#incidents">Incidents</a><a href="/#checklist">Checklist</a><a href="/updates/">Updates</a><a href="/week/" aria-current="page">Issues</a><a href="/#about">About</a></nav>
+    <div class="header-cta"><a class="gh" href="https://github.com/anizmo/fencing-token" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a><a class="btn btn-primary btn-sm" href="https://www.linkedin.com/in/potdaranuj/">Follow</a></div>
+  </div>
+</header>
+<main id="main" class="wrap section narrow">
+  <p class="eyebrow"><a href="/week/">Issues</a> · <time datetime="2026-11-02">2 Nov 2026</time> · AUDIT TRAILS</p>
+  <h1 class="week-h">Logs the agent can&#x27;t edit: sources for a tamper-resistant record</h1>
+  <p class="section-lede">Why an audit trail the agent can write is not evidence, and the papers, report, and tools behind a record it cannot touch.</p>
+  <img class="week-img" src="og.png" width="1200" height="630" alt="Logs the agent can&#x27;t edit">
+  <h2 class="h-small">Sources</h2>
+  <ol class="entries entries-plain"><li class="entry"><div class="entry-head"><span class="kind kind-paper">Paper</span><a class="entry-title" href="https://arxiv.org/abs/2609.30266">LLM Agents Can Easily Tamper With Their Own Traces</a></div><p class="entry-desc">Qin et al. found every tested harness but Muse Code let agents delete their own traces without tripping monitors; log outside the agent&#x27;s control. <span class="host">arxiv.org</span></p></li><li class="entry"><div class="entry-head"><span class="kind kind-article">Article</span><a class="entry-title" href="https://alignment.openai.com/misalignment-reports/accessing-and-changing-internal-systems-during-dashboard-research/">OpenAI: Accessing and changing internal systems during dashboard research</a></div><p class="entry-desc">A model reverted a setting, kept using the token it obtained, and did not disclose it; a monitor over recorded traffic flagged it later. <span class="host">alignment.openai.com</span></p></li><li class="entry"><div class="entry-head"><span class="kind kind-paper">Paper</span><a class="entry-title" href="https://arxiv.org/abs/2604.05485">Auditable Agents</a></div><p class="entry-desc">Five dimensions of agent auditability, including evidence integrity; reports 8.3 ms median overhead for pre-execution mediation with tamper-evident records. <span class="host">arxiv.org</span></p></li><li class="entry"><div class="entry-head"><span class="kind kind-code">Code</span><a class="entry-title" href="https://github.com/transparency-dev/tessera">Tessera</a></div><p class="entry-desc">Go library for tile-based transparency logs, a building block for tamper-evident logs. <span class="host">github.com</span></p></li></ol>
+  <p class="small muted">Part of the <a href="/">Fencing Token roadmap</a>. Found an error? <a href="https://github.com/anizmo/fencing-token/issues/new/choose">Open an issue</a>.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand brand-foot" href="/"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="19" width="30" height="3" rx="1.2" fill="#8A97A8"/><path fill="#8A97A8" d="M2 17.5 5 14.5 8 17.5V29H2Z"/><path fill="#6E7D92" d="M9.5 14 12.5 11 15.5 14V29h-6Z"/><path style="fill:var(--ink-2)" d="M17 10 20 7 23 10V29h-6Z"/><path fill="#F4A62A" d="M24.5 6 27.5 3 30.5 6V29h-6Z"/></svg><span class="wordmark">fencing <b>token</b></span></a>
+      <p class="muted">Systems that can say no. An independent, weekly-maintained roadmap for building AI agents that are contained, constrained, and auditable.</p>
+    </div>
+    <div>
+      <h2 class="foot-h">Follow</h2>
+      <ul class="foot-list"><li><a href="https://www.linkedin.com/in/potdaranuj/">LinkedIn</a></li><li><a href="/feed.xml">RSS / Atom feed</a></li><li><a href="https://github.com/anizmo/fencing-token">GitHub</a> (watch releases)</li></ul>
+    </div>
+    <div>
+      <h2 class="foot-h">Project</h2>
+      <ul class="foot-list"><li><a href="https://github.com/anizmo/fencing-token/blob/main/CONTRIBUTING.md">Contribute</a></li><li><a href="https://github.com/anizmo/fencing-token/issues/new/choose">Suggest a resource</a></li><li><a href="/updates/">Changelog</a></li><li><a href="https://github.com/anizmo/fencing-token/blob/main/LICENSE">License: CC BY 4.0</a></li></ul>
+    </div>
+    <div>
+      <h2 class="foot-h">Colophon</h2>
+      <p class="muted small">Hand-built static site. Cookieless, privacy-friendly page counts via Cloudflare Web Analytics; no personal data, no ad trackers. Set in Space Grotesk, Inter, and JetBrains Mono. Not a cryptocurrency. Views are the author's own, not his employer's.</p>
+    </div>
+  </div>
+  <div class="wrap foot-base"><span>© 2026 Anuj Ashok Potdar</span><span>Last reviewed <time datetime="2026-11-03">3 Nov 2026</time></span></div>
+</footer>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "6a2dc89a025249dca454f2290e062d61"}'></script>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

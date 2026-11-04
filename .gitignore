@@ -1,0 +1,8 @@
+.DS_Store
+Icon?
+*.gdoc
+.tmp.drive*
+.env
+*.env
+*.pem
+*.key

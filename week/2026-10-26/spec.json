@@ -1,0 +1,41 @@
+{
+ "date": "2026-10-26",
+ "kicker": "WEEK OF OCT 26  ·  DESIGN-REVIEW REFERENCES",
+ "title": [
+  "Six free references for your next agent review."
+ ],
+ "heading": "Six free agent-security references for your next design review",
+ "intro": "New specs and references from OWASP, CoSAI, MITRE ATLAS, and the MCP project, each mapped to a question you can ask in a review.",
+ "items": [
+  [
+   "OWASP GenAI Red Teaming Manual v1.0 (Oct 20)",
+   "An eight-phase method, from planning to remediation, that covers agents.",
+   "https://genai.owasp.org/resource/genai-red-teaming-manual-version-1-0/"
+  ],
+  [
+   "CoSAI: Zero Trust for AI Systems (Sep 16)",
+   "Authorization can't be delegated to the model; bind sessions to the user and issue short-lived, scoped tokens.",
+   "https://www.coalitionforsecureai.org/zero-trust-for-ai-systems-why-authorization-cant-live-inside-the-model/"
+  ],
+  [
+   "MITRE ATLAS v2026.09 (Sep 15)",
+   "New agent techniques, such as probing trigger channels and discovering runtime capabilities.",
+   "https://github.com/mitre-atlas/atlas-data/releases/tag/v2026.09"
+  ],
+  [
+   "OWASP Agent Control Standard (Sep 1)",
+   "Runtime hooks and portable policy across agent frameworks. Early stage (v0.1).",
+   "https://genai.owasp.org/resource/agent-control-standard-acs/"
+  ],
+  [
+   "CoSAI: MCP Security v2.0 (Aug 12)",
+   "Four assurance levels across eight security dimensions.",
+   "https://www.coalitionforsecureai.org/mcp-security-version-2-0-from-threat-taxonomy-to-a-model-you-can-actually-audit-against/"
+  ],
+  [
+   "MCP spec, 2026-07-28 revision",
+   "Removes protocol-level sessions; clients must validate the issuer in authorization responses when present.",
+   "https://modelcontextprotocol.io/specification/2026-07-28/changelog"
+  ]
+ ]
+}
