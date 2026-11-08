@@ -4,6 +4,20 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
+
+  // Reading lens: Experts / Engineers / Everyone. lens.js sets it before paint; this wires the switches.
+  var root = document.documentElement, switches = $$('.lens button');
+  var mark = function (l) { switches.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-set') === l ? 'true' : 'false'); }); };
+  mark(root.getAttribute('data-lens') || 'engineer');
+  switches.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var l = b.getAttribute('data-set');
+      root.setAttribute('data-lens', l); mark(l);
+      try { localStorage.setItem('ft-lens', l); } catch (e) {}
+      try { var u = new URL(location.href); u.searchParams.set('lens', l); history.replaceState(null, '', u.pathname + u.search + u.hash); } catch (e) {}
+    });
+  });
+
   // Filter: "/" focuses; matches title, authors, description, type.
   var input = $('#filter');
   if (input) {

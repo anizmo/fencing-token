@@ -18,6 +18,8 @@ AI agents now read email, browse the web, call APIs, write code, and move money.
 **Maintained by [Anuj Ashok Potdar](https://www.linkedin.com/in/potdaranuj/)** · IEEE Senior Member · Author (Wiley-IEEE, Springer) · Manning Technical Reviewer
 **Community:** Fencing Token · New entries every week · [Contribute](CONTRIBUTING.md) · **Website:** [fencingtoken.com](https://fencingtoken.com/)
 
+**New to AI security?** Start with [Concepts, explained three ways](CONCEPTS.md): every idea in this roadmap for experts, for software engineers (mapped to things you already know), and for everyone (everyday examples, no tech background needed).
+
 ⭐ Star the repo to follow weekly updates.
 
 ---
@@ -82,6 +84,7 @@ Start here. Learn the vocabulary and the shape of the risk before touching tools
 - [OWASP Agentic AI: Threats and Mitigations](https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/). Deeper threat taxonomy for agent memory, tools, and multi-agent systems.
 - [MITRE ATLAS](https://atlas.mitre.org/). ATT&CK-style knowledge base of real adversary tactics against AI systems. The [v2026.09 release](https://github.com/mitre-atlas/atlas-data/releases/tag/v2026.09) added techniques for agent recon, trigger channels, and crafted AI assistant links.
 - [Google Secure AI Framework (SAIF)](https://saif.google/). Practitioner framework and risk self-assessment for AI systems.
+- [The Protection of Information in Computer Systems](https://web.mit.edu/Saltzer/www/publications/protection/) (Jerome Saltzer and Michael Schroeder, 1975). The classic design principles, including complete mediation ("every access to every object must be checked for authority") and least privilege, that most agent controls are rediscovering.
 
 ### Stage 1: Prompt injection and goal hijack
 
@@ -107,6 +110,7 @@ Assume the agent will be tricked. Make sure that when it is, it can only break a
 - [NsJail](https://github.com/google/nsjail). Google's lightweight process isolation using Linux namespaces, cgroups, and seccomp.
 - [Wasmtime](https://wasmtime.dev/). WebAssembly runtime for capability-based, deny-by-default execution of tools and plugins.
 - [Smokescreen](https://github.com/stripe/smokescreen). Stripe's egress proxy; block agents from reaching internal networks and cloud metadata endpoints.
+- [Strands Box](https://github.com/strands-agents/box) (Strands Agents, AWS). Preview sandbox that routes an agent's shell commands, Python, MCP calls, and network traffic through one default-deny Dogwood policy engine outside the agent process, with a shared event history so a file read can block a later outbound request; macOS on Apple silicon only for now, and files granted directly in `box.toml` bypass the policy engine.
 
 ### Stage 3: Identity, authorization, and policy enforcement
 
@@ -124,6 +128,7 @@ The core of "auditable": every action an agent proposes is checked by a determin
 - [MCP Tool Exposure is a Privilege Grant: A Two-Gate Authorization Model](https://cloudsecurityalliance.org/blog/2026/10/20/mcp-tool-exposure-is-a-privilege-grant-a-two-gate-authorization-model-for-agentic-ai) (Badal Bhushan, CSA). Separates which tools an agent may see from whether one specific call on one specific resource may run; `tools/list` filtering is risk reduction, not authorization.
 - [ToolFence](https://arxiv.org/abs/2609.37196) (Li, He, Dai, Xiao). Preprint: compiles a typed authorization blueprint before execution and enforces it with a deterministic monitor that tracks provenance, aimed at attacks that keep the intended tool but manipulate its arguments.
 - [Design Tenets for Agent Identity Management Systems](https://www.nist.gov/blogs/cybersecurity-insights/design-tenets-agent-identity-management-systems) (Booth, Fisher, Galluzzo of NIST and Clancy of MITRE). Ten initial tenets that will guide the NCCoE's agent demonstrations, including zero standing privilege, separating policy from reasoning ("guardrails alone are insufficient"), deterministic access decisions, and append-only evidence kept independent of the agent.
+- [Workflow Identity Hijacking](https://noma.security/noma-labs/workflow-identity-hijacking-the-silent-backdoor-in-ai-workflows) (Sasi Levi, Noma Labs). An ordinary request sent through an open entry point, such as a public support inbox, is carried out with the workflow creator's privileges instead of the requester's, so no prompt injection is needed; pass the requester's identity into every downstream call.
 
 ### Stage 4: MCP and the tool supply chain
 
@@ -173,6 +178,7 @@ Measure it or it isn't real.
 - [OWASP GenAI Red Teaming Manual v1.0](https://genai.owasp.org/resource/genai-red-teaming-manual-version-1-0/). An eight-phase methodology, from planning to remediation, that covers models, applications, and agents.
 - [buried-injections](https://github.com/rudratoshs/buried-injections) (Rudratosh Shastri). Reproducible benchmark of 10 open-source injection detectors against 629 AgentDojo attacks buried in tool output; none caught most attacks without also flagging safe traffic, which is why policy enforcement still matters.
 - [INFUSE](https://arxiv.org/abs/2610.20776) (Nguyen, Guo, Dubauskas, Damuluru, Johnson, Leach). Indirect prompt injection benchmark of 40 long-horizon tasks and 56 attack scenarios run on 19 LLMs; per-model attack success ranged from 3.2% to 41.9% and existing guard models gave limited protection, so any result has to name the model. [Code](https://github.com/judydnguyen/infuse).
+- [ToFu: Exploiting and Fuzzing the LLM-Orchestrator-Tool Trust Boundary](https://arxiv.org/abs/2610.13651) (Ananto, Prevost-Avenel, Smith, Kim, Kim, Khan). Preprint: derives semantic security checks from tool metadata and fuzzes MCP tools with them; it found verified bugs in 343 tools across 118 of 273 servers, so tools must enforce their documented input limits themselves rather than trust model-generated arguments.
 
 ### Stage 8: Governance and standards
 
@@ -209,6 +215,9 @@ Every incident is a free lesson. Each one maps to a stage above.
 | [Malicious Claude Code extension in Cursor's marketplace](https://cursor.com/blog/claude-code-extension-security-notice) | Cursor reports that modified versions 2.1.312 and 2.1.313 of the Anthropic.claude-code extension, not built by Anthropic, were available from 2:27am to 1:35pm PT on Oct 29, 2026; they sent host details, added an attacker SSH key, and installed persistence for a reverse SSH tunnel | An extension update is new code running with your access; pin versions and know which machines pulled each release | 4 |
 | [Unauthorized AI relays switch the sandbox off](https://www.security.com/threat-intelligence/openai-claude-unauthorized-relays) | Symantec's Threat Hunter Team found a relay service at a dozen organizations that installs the genuine Codex and Claude Code CLIs, then rewrites their config to route requests through its servers, set the sandbox to "danger-full-access", swap in relay-issued tokens, and disable telemetry; no abuse observed so far | A sandbox that lives in a user-editable config file is a setting, not a boundary; monitor agent configs and egress from outside the agent | 2, 6 |
 | [MCPhantom](https://www.glow.io/blogs/mcphantom-ai-coding-agents-are-installing-vulnerable-deprecated-mcp-servers-from-training-data) | Glow Labs found coding agents installing archived Anthropic reference MCP servers they remembered from training data; it reports four high-severity flaws in those servers, including an RCE in the Puppeteer server, and the maintainers said no fix will come | The model's memory is not a package registry; approve one MCP server per service and check deprecation before install | 4 |
+| [ChatGPT Lockdown Mode bypass](https://research.checkpoint.com/2026/chatgpt-lockdown-mode-bypass-phishing-malware-delivery-and-silent-data-exfiltration/) | Alexey Bukhteyev of Check Point Research found that ChatGPT's HTML-preview sandbox held popups for approval by redefining `window.open`, while the iframe sandbox itself still allowed popups and let them escape it; a nested iframe's unmodified `open()` gave an unsandboxed window that could send chat history out despite Lockdown Mode, with zero clicks in the ChatGPT Classic desktop app. OpenAI removed both permissions by Sept 18, 2026 | Remove a capability where it is granted; a wrapper around one function leaves every other path open | 2, 3 |
+| [Plugin4Shell](https://www.air.security/blog-posts/plugin4shell) | Air Security (Or Nevo, Dor Granat, Niv Hoffman) showed Claude Code, Codex, GitHub Copilot, and Gemini CLI checked out a marketplace-pinned plugin commit without verifying the result, so a default branch named like the pinned SHA (or `FETCH_HEAD` in Gemini CLI) installed attacker code, including on background auto-update. Fixed in Claude Code 2.1.179 (CVE-2026-86063), Codex 0.146.0, and VS Code 1.136.0; Gemini CLI is deprecated and will not be patched | Verify what actually landed (`git rev-parse HEAD`), not what you asked for | 4 |
+| [GitSpawn](https://www.manifold.security/blog/ai-coding-agents-git-hijack) | Manifold Security (Francisco Rosales) found that coding agents' background git calls honored a repository's own `.git/config`, so a `core.fsmonitor` command in a repo received as files ran as the developer, outside the sandbox and with no approval prompt; eight findings across seven agents, four unpatched at publication on Sept 1, 2026 | Anything the agent runs on its own is attack surface; strip repository config on background calls (`git -c core.fsmonitor=false`) | 2, 4 |
 
 More incidents: [AI Incident Database](https://incidentdatabase.ai/).
 

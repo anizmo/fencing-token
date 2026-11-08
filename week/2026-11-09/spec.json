@@ -1,0 +1,65 @@
+{
+ "date": "2026-11-09",
+ "kicker": "SECOND PATHS",
+ "title": [
+  "Block the capability,",
+  "not the function"
+ ],
+ "heading": "Block the capability, not the function: how a popup got past ChatGPT's Lockdown Mode",
+ "intro": "Check Point found that ChatGPT's HTML previews guarded popups by wrapping one function while the sandbox still granted the capability. Here are the sources, plus two coding-agent flaws where a check covered the usual path but not a second one.",
+ "items": [
+  [
+   "Check Point Research: ChatGPT Lockdown Mode Bypass",
+   "Alexey Bukhteyev: a nested iframe reached an unwrapped window.open, and popups escaped the preview sandbox and Lockdown Mode; zero clicks in ChatGPT Classic. OpenAI fixed it by Sept 18, 2026.",
+   "https://research.checkpoint.com/2026/chatgpt-lockdown-mode-bypass-phishing-malware-delivery-and-silent-data-exfiltration/"
+  ],
+  [
+   "OpenAI: Introducing Lockdown Mode",
+   "What the setting turns off (live browsing, internet images, Canvas networking, connectors, downloads) to limit prompt-injection exfiltration.",
+   "https://openai.com/index/introducing-lockdown-mode-and-elevated-risk-labels-in-chatgpt/"
+  ],
+  [
+   "Saltzer and Schroeder: The Protection of Information in Computer Systems",
+   "The 1975 source of complete mediation: every access to every object must be checked for authority.",
+   "https://web.mit.edu/Saltzer/www/publications/protection/"
+  ],
+  [
+   "Air Security: Plugin4Shell",
+   "Four coding agents checked out a pinned plugin commit but never verified where they landed; the fix compares git rev-parse HEAD with the pin.",
+   "https://www.air.security/blog-posts/plugin4shell"
+  ],
+  [
+   "Manifold Security: GitSpawn",
+   "Background git calls ran a repository's own core.fsmonitor command outside the sandbox, with no approval prompt.",
+   "https://www.manifold.security/blog/ai-coding-agents-git-hijack"
+  ],
+  [
+   "Strands Box",
+   "An open-source sandbox (preview, macOS on Apple silicon) that sends shell, Python, MCP, and network actions through one default-deny policy engine outside the agent.",
+   "https://github.com/strands-agents/box"
+  ]
+ ],
+ "image": {
+  "type": "compare",
+  "kicker": "CHATGPT LOCKDOWN MODE BYPASS",
+  "title": "One function was wrapped. The capability was not.",
+  "left": {
+   "head": "WHAT THE WRAPPER HELD",
+   "lines": [
+    "window.open(url)",
+    "result: held for approval"
+   ]
+  },
+  "right": {
+   "head": "WHAT THE SANDBOX ALLOWED",
+   "lines": [
+    "frame.contentWindow.open(url)",
+    "allow-popups-to-escape-sandbox",
+    "result: unsandboxed popup"
+   ]
+  },
+  "caption": "Fixed by Sept 18, 2026: the popup permissions were removed from the sandbox itself.",
+  "footer": "Source: Check Point Research",
+  "mid": "vs"
+ }
+}
