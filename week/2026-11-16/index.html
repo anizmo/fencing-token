@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Put the lock in the code: why an AI&#x27;s &quot;no&quot; is not access control | Fencing Token</title>
+<meta name="description" content="Arize&#x27;s test support agent refused every direct request to send data out, yet pulled a stranger&#x27;s record in 28 of 100 runs until its tools were scoped to the signed-in customer. Here are the sources, plus the confused deputy, the 1988 idea behind it.">
+<meta name="author" content="Anuj Ashok Potdar">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://fencingtoken.com/week/2026-11-16/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Fencing Token">
+<meta property="og:title" content="Put the lock in the code: why an AI&#x27;s &quot;no&quot; is not access control | Fencing Token">
+<meta property="og:description" content="Arize&#x27;s test support agent refused every direct request to send data out, yet pulled a stranger&#x27;s record in 28 of 100 runs until its tools were scoped to the signed-in customer. Here are the sources, plus the confused deputy, the 1988 idea behind it.">
+<meta property="og:url" content="https://fencingtoken.com/week/2026-11-16/">
+<meta property="og:image" content="https://fencingtoken.com/week/2026-11-16/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fencingtoken.com/week/2026-11-16/og.png">
+<meta name="theme-color" content="#0D1B2A">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/mark-app-icon-180-apple-touch.png">
+<link rel="alternate" type="application/atom+xml" title="Fencing Token updates" href="/feed.xml">
+<link rel="preload" href="/assets/fonts/space-grotesk-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<script src="/assets/lens.js"></script>
+<link rel="stylesheet" href="/assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Fencing Token home"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="19" width="30" height="3" rx="1.2" fill="#8A97A8"/><path fill="#8A97A8" d="M2 17.5 5 14.5 8 17.5V29H2Z"/><path fill="#6E7D92" d="M9.5 14 12.5 11 15.5 14V29h-6Z"/><path style="fill:var(--ink-2)" d="M17 10 20 7 23 10V29h-6Z"/><path fill="#F4A62A" d="M24.5 6 27.5 3 30.5 6V29h-6Z"/></svg><span class="wordmark">fencing <b>token</b></span></a>
+    <nav class="nav" aria-label="Primary"><a href="/concepts/">Concepts</a><a href="/#roadmap">Roadmap</a><a href="/#incidents">Incidents</a><a href="/#checklist">Checklist</a><a href="/updates/">Updates</a><a href="/week/" aria-current="page">Issues</a><a href="/#about">About</a></nav>
+    <div class="header-cta"><a class="gh" href="https://github.com/anizmo/fencing-token" aria-label="Source on GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg></a><a class="btn btn-primary btn-sm" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7523585585391788032">Subscribe</a></div>
+  </div>
+</header>
+<main id="main" class="wrap section narrow">
+  <p class="eyebrow"><a href="/week/">Issues</a> · <time datetime="2026-11-16">16 Nov 2026</time> · WHOSE AUTHORITY?</p>
+  <h1 class="week-h">Put the lock in the code: why an AI&#x27;s &quot;no&quot; is not access control</h1>
+  <p class="section-lede">Arize&#x27;s test support agent refused every direct request to send data out, yet pulled a stranger&#x27;s record in 28 of 100 runs until its tools were scoped to the signed-in customer. Here are the sources, plus the confused deputy, the 1988 idea behind it.</p>
+  <img class="week-img" src="og.png" width="1200" height="630" alt="The AI said yes 28 times in 100">
+  <h2 class="h-small">Sources</h2>
+  <ol class="entries entries-plain"><li class="entry"><div class="entry-head"><span class="kind kind-article">Article</span><a class="entry-title" href="https://arize.com/blog/indirect-prompt-injection-ai-agents/">Arize: A web page talked our agent into leaking a stranger&#x27;s data</a></div><p class="entry-desc">Nancy Chauhan (Oct 2026): 98 of 98 direct requests refused, 28 of 100 routine-sounding lookups leaked, 0 leaks once every customer tool was bound to the logged-in session in code. <span class="host">arize.com</span></p></li><li class="entry"><div class="entry-head"><span class="kind kind-article">Article</span><a class="entry-title" href="https://noma.security/noma-labs/workflow-identity-hijacking-the-silent-backdoor-in-ai-workflows">Noma Labs: Workflow Identity Hijacking</a></div><p class="entry-desc">Sasi Levi: an ordinary email to a public support inbox got quarterly sales numbers back, because the AI workflow ran with its creator&#x27;s privileges. No prompt injection needed. <span class="host">noma.security</span></p></li><li class="entry"><div class="entry-head"><span class="kind kind-article">Article</span><a class="entry-title" href="https://labs.zenity.io/post/agentcorruption-how-a-single-prompt-collapsed-the-entire-cloud-security-model">Zenity Labs: AgentCorruption</a></div><p class="entry-desc">One prompt to an exposed AWS Bedrock AgentCore agent reached the metadata service and returned credentials for a default role that spanned every AgentCore agent in the account&#x27;s region. AWS hardened the role by Sept 29, 2026. <span class="host">labs.zenity.io</span></p></li><li class="entry"><div class="entry-head"><span class="kind kind-paper">Paper</span><a class="entry-title" href="https://arxiv.org/abs/2610.23077">When Approval Becomes Execution (Shi, Mou)</a></div><p class="entry-desc">A denied agent fetched a routine approval token and completed the protected operation in 8 of 9 reruns: possession of a token was treated as permission. <span class="host">arxiv.org</span></p></li><li class="entry"><div class="entry-head"><span class="kind kind-standard">Standard</span><a class="entry-title" href="https://modelcontextprotocol.io/specification/latest/basic/security_best_practices">MCP Security Best Practices: Confused Deputy Problem</a></div><p class="entry-desc">The official MCP guidance on confused deputies and token passthrough: servers must not accept tokens that were not issued for them. <span class="host">modelcontextprotocol.io</span></p></li><li class="entry"><div class="entry-head"><span class="kind kind-standard">Standard</span><a class="entry-title" href="https://genai.owasp.org/resource/securing-agentic-applications-v2/">OWASP: Securing Agentic Applications V2</a></div><p class="entry-desc">A builder and defender&#x27;s guide released Nov 10, 2026, covering architecture, identity and access controls, runtime protection, supply chain, and testing. <span class="host">genai.owasp.org</span></p></li><li class="entry"><div class="entry-head"><span class="kind kind-article">Article</span><a class="entry-title" href="https://portswigger.net/web-security/llm-attacks/lab-exploiting-llm-apis-with-excessive-agency">PortSwigger lab: Exploiting LLM APIs with excessive agency</a></div><p class="entry-desc">Free, in the browser: get a website&#x27;s AI chat to delete a user through an API it should never have let you reach. <span class="host">portswigger.net</span></p></li></ol>
+  <p class="small muted">Part of the <a href="/">Fencing Token roadmap</a>. Found an error? <a href="https://github.com/anizmo/fencing-token/issues/new/choose">Open an issue</a>.</p>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand brand-foot" href="/"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="19" width="30" height="3" rx="1.2" fill="#8A97A8"/><path fill="#8A97A8" d="M2 17.5 5 14.5 8 17.5V29H2Z"/><path fill="#6E7D92" d="M9.5 14 12.5 11 15.5 14V29h-6Z"/><path style="fill:var(--ink-2)" d="M17 10 20 7 23 10V29h-6Z"/><path fill="#F4A62A" d="M24.5 6 27.5 3 30.5 6V29h-6Z"/></svg><span class="wordmark">fencing <b>token</b></span></a>
+      <p class="muted">Systems that can say no. An independent, weekly-maintained roadmap for building AI agents that are contained, constrained, and auditable.</p>
+    </div>
+    <div>
+      <h2 class="foot-h">Follow</h2>
+      <ul class="foot-list"><li><a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7523585585391788032">LinkedIn newsletter</a></li><li><a href="/feed.xml">RSS / Atom feed</a></li><li><a href="https://github.com/anizmo/fencing-token">GitHub</a> (watch releases)</li></ul>
+    </div>
+    <div>
+      <h2 class="foot-h">Project</h2>
+      <ul class="foot-list"><li><a href="https://github.com/anizmo/fencing-token/blob/main/CONTRIBUTING.md">Contribute</a></li><li><a href="https://github.com/anizmo/fencing-token/issues/new/choose">Suggest a resource</a></li><li><a href="/updates/">Changelog</a></li><li><a href="https://github.com/anizmo/fencing-token/blob/main/LICENSE">License: CC BY 4.0</a></li></ul>
+    </div>
+    <div>
+      <h2 class="foot-h">Colophon</h2>
+      <p class="muted small">Hand-built static site. Cookieless, privacy-friendly page counts via Cloudflare Web Analytics; no personal data, no ad trackers. Set in Space Grotesk, Inter, and JetBrains Mono. Not a cryptocurrency. Views are the author's own, not his employer's.</p>
+    </div>
+  </div>
+  <div class="wrap foot-base"><span>© 2026 Anuj Ashok Potdar</span><span>Last reviewed <time datetime="2026-11-12">12 Nov 2026</time></span></div>
+</footer>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "6a2dc89a025249dca454f2290e062d61"}'></script>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

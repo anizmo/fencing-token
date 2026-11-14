@@ -1,0 +1,89 @@
+{
+ "date": "2026-11-16",
+ "kicker": "WHOSE AUTHORITY?",
+ "title": [
+  "The AI said yes",
+  "28 times in 100"
+ ],
+ "heading": "Put the lock in the code: why an AI's \"no\" is not access control",
+ "intro": "Arize's test support agent refused every direct request to send data out, yet pulled a stranger's record in 28 of 100 runs until its tools were scoped to the signed-in customer. Here are the sources, plus the confused deputy, the 1988 idea behind it.",
+ "items": [
+  [
+   "Arize: A web page talked our agent into leaking a stranger's data",
+   "Nancy Chauhan (Oct 2026): 98 of 98 direct requests refused, 28 of 100 routine-sounding lookups leaked, 0 leaks once every customer tool was bound to the logged-in session in code.",
+   "https://arize.com/blog/indirect-prompt-injection-ai-agents/"
+  ],
+  [
+   "Noma Labs: Workflow Identity Hijacking",
+   "Sasi Levi: an ordinary email to a public support inbox got quarterly sales numbers back, because the AI workflow ran with its creator's privileges. No prompt injection needed.",
+   "https://noma.security/noma-labs/workflow-identity-hijacking-the-silent-backdoor-in-ai-workflows"
+  ],
+  [
+   "Zenity Labs: AgentCorruption",
+   "One prompt to an exposed AWS Bedrock AgentCore agent reached the metadata service and returned credentials for a default role that spanned every AgentCore agent in the account's region. AWS hardened the role by Sept 29, 2026.",
+   "https://labs.zenity.io/post/agentcorruption-how-a-single-prompt-collapsed-the-entire-cloud-security-model"
+  ],
+  [
+   "When Approval Becomes Execution (Shi, Mou)",
+   "A denied agent fetched a routine approval token and completed the protected operation in 8 of 9 reruns: possession of a token was treated as permission.",
+   "https://arxiv.org/abs/2610.23077"
+  ],
+  [
+   "MCP Security Best Practices: Confused Deputy Problem",
+   "The official MCP guidance on confused deputies and token passthrough: servers must not accept tokens that were not issued for them.",
+   "https://modelcontextprotocol.io/specification/latest/basic/security_best_practices"
+  ],
+  [
+   "OWASP: Securing Agentic Applications V2",
+   "A builder and defender's guide released Nov 10, 2026, covering architecture, identity and access controls, runtime protection, supply chain, and testing.",
+   "https://genai.owasp.org/resource/securing-agentic-applications-v2/"
+  ],
+  [
+   "PortSwigger lab: Exploiting LLM APIs with excessive agency",
+   "Free, in the browser: get a website's AI chat to delete a user through an API it should never have let you reach.",
+   "https://portswigger.net/web-security/llm-attacks/lab-exploiting-llm-apis-with-excessive-agency"
+  ]
+ ],
+ "image": {
+  "type": "flow",
+  "kicker": "ARIZE TEST · OCTOBER 2026",
+  "title": "The AI said yes. The tool said no.",
+  "nodes": [
+   {
+    "label": "Order page",
+    "sub": [
+     "a checklist step:",
+     "add customer #15"
+    ],
+    "style": "normal",
+    "arrow": "red"
+   },
+   {
+    "label": "AI agrees",
+    "sub": [
+     "28 of 100 runs",
+     "without the fix"
+    ],
+    "style": "bad"
+   },
+   {
+    "label": "Scoped tool",
+    "sub": [
+     "only the signed-in",
+     "customer's data"
+    ],
+    "style": "gate"
+   },
+   {
+    "label": "Leaks: 0",
+    "sub": [
+     "20 tries with fix,",
+     "0 records back"
+    ],
+    "style": "good"
+   }
+  ],
+  "caption": "Put the lock in the code, not in the AI's manners.",
+  "footer": "Source: Arize (Nancy Chauhan)"
+ }
+}

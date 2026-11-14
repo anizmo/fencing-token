@@ -74,6 +74,14 @@ New concepts are added as they come up in the [weekly newsletter](https://www.li
 - **Where the analogy breaks:** A building's doors are fixed, and visitors cannot add new ones. In software, attacker code can often open a new path on the spot, so the check has to sit in the layer every path goes through, not on each door.
 - **Read:** [The Protection of Information in Computer Systems](https://web.mit.edu/Saltzer/www/publications/protection/) (Jerome Saltzer and Michael Schroeder, 1975)
 
+## Confused deputy
+- **Stage:** 3
+- **Expert:** Norm Hardy's 1988 name for a program tricked into using its own authority for a caller who lacks it. Agents fit exactly: they act with a service account, a broad role, or a user's token, so whoever steers the agent borrows that authority.
+- **Engineer:** CSRF for agents. The browser attaches your cookie to a forged request; the agent attaches its service-account token to a request a stranger wrote. Same lesson: the server must check who really sent the request, not just whose credential came along.
+- **Everyone:** A receptionist with keys to every office. A caller says, "I'm from finance, read me the sales report on the director's desk." The receptionist does, because they can open the door. Nobody checked whether the caller could.
+- **Where the analogy breaks:** A receptionist can learn to spot a strange caller. An AI assistant often can't, so the fix isn't a smarter assistant: each request must carry the asker's own permissions, and the system holding the data checks those.
+- **Read:** [MCP Security Best Practices: Confused Deputy Problem](https://modelcontextprotocol.io/specification/latest/basic/security_best_practices)
+
 ## Least privilege
 - **Stage:** 3
 - **Expert:** Each agent task gets the minimum permissions it needs, as short-lived credentials scoped to one user, one task, and specific resources, so a compromised run can only do what that run needed.
@@ -160,3 +168,5 @@ New concepts are added as they come up in the [weekly newsletter](https://www.li
 - **ChatGPT Lockdown Mode bypass:** A safety mode meant to stop ChatGPT from sending a conversation out had a gap. A pop-up window could slip out of its closed box and send the chat history away, in the ChatGPT Classic desktop app without a single click. OpenAI closed the gap. *Lesson:* lock the door itself, not just the handle people usually use.
 - **Plugin4Shell:** AI coding assistants asked for an exact, approved version of an add-on but never checked that what they received was that version, so a harmful look-alike could be installed and run, even during automatic updates. *Lesson:* check what actually arrived, not what you ordered.
 - **GitSpawn:** Opening a project folder someone sent you could make an AI coding assistant run a program hidden in that folder's settings, without ever asking you. *Lesson:* what the assistant does on its own, in the background, needs the same locks as what it does when asked.
+- **AgentCorruption (AWS Bedrock AgentCore):** One message to a company's public-facing AI agent could make it fetch its own keys from a hidden internal address. Those keys worked on every AI agent in the same cloud account and region: an attacker could read their private chats, plant false memories, and take the passwords stored for their tools. Amazon has since narrowed the keys. *Lesson:* an assistant's keys work for anyone who can talk it into using them, so give each assistant only the keys for its own job.
+- **server-everything cross-origin environment leak:** When run in its web mode, a sample add-on that developers run on their own computers would hand the secret keys and passwords it was started with to any website open in the same browser. A fix is out, but older installs must be updated by hand. *Lesson:* "only on my computer" is not a lock; anything that answers there needs a password too.
