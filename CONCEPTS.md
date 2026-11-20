@@ -1,6 +1,6 @@
 # Concepts, explained three ways
 
-AI agent security uses a lot of new words for ideas that are often old ones. Every concept here is explained three ways:
+AI, and AI agent security, use a lot of new words for ideas that are often old ones. Every concept here is explained three ways:
 
 - **Expert:** the precise version, for people who work on AI security.
 - **Engineer:** the same idea mapped to something you already know from software engineering.
@@ -25,6 +25,27 @@ New concepts are added as they come up in the [weekly newsletter](https://www.li
 - **Everyone:** A very fast, very eager new assistant who can read your email, browse the web, and press buttons for you. Clever, but brand new, and inclined to believe what they read.
 - **Where the analogy breaks:** A new hire builds judgment about whom to trust and learns from mistakes. Today's agents do neither reliably.
 - **Read:** [OWASP Top 10 for Agentic Applications](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications/)
+
+## Temperature
+- **Expert:** A sampling setting applied to the model's next-token scores (logits) before softmax: they are divided by the temperature, so values below 1 sharpen the odds toward the top choice and values above 1 flatten them, letting unlikely tokens through more often. Near 0 it approaches always picking the most likely token. It changes how random the output is, not what the model knows or how true it is, and is often combined with top-p sampling.
+- **Engineer:** A knob on a weighted random choice. Raise every weight to the power 1/T and renormalise: T below 1 favours the heavy weights until it is almost argmax, T above 1 evens them out toward uniform. Even at 0, served outputs can still differ slightly between runs.
+- **Everyone:** Ordering at your usual restaurant. Turn it down and you order your favourite dish every single time. Turn it up and you try random things from the menu: sometimes a great find, sometimes something strange. The menu itself, what the model knows, stays the same.
+- **Where the analogy breaks:** Ordering your usual doesn't make it the right dish. Low temperature makes answers repeatable, not correct: a model can repeat the same wrong answer every time, very confidently.
+- **Read:** [How to generate text: decoding methods](https://huggingface.co/blog/how-to-generate) (Hugging Face)
+
+## RAG (retrieval-augmented generation)
+- **Expert:** Before answering, the system searches a collection of documents (usually by embedding similarity, often with keyword search too), puts the best-matching passages into the prompt, and the model answers from them, ideally citing them. It lets a model use private or recent information without retraining, and the answer can only be as good as what was retrieved. The name comes from Lewis et al., 2020.
+- **Engineer:** A read path in front of the model: query the index, take the top results, template them into the request. Like rendering search results into a page, except the renderer is a model that may also obey text it finds in the rows, so retrieved text is untrusted input.
+- **Everyone:** An open-book exam. The model hasn't memorised your college handbook. It looks up the right pages first, then answers from them. Hand it the wrong page, or last year's rules, and you get a confident wrong answer.
+- **Where the analogy breaks:** A student with an open book knows the book is just a book. The model can treat words on a retrieved page as instructions, so one planted page can hijack the answer. Try it in [Open Book](https://fencingtoken.com/play/open-book/).
+- **Read:** [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401) (Lewis et al., 2020)
+
+## Types of RAG
+- **Expert:** Basic RAG embeds chunks and fetches the top few by vector similarity. Hybrid RAG adds keyword search such as BM25 and a reranker that re-sorts the merged results. Graph RAG first builds a knowledge graph of entities with summaries of related groups, so it can answer whole-collection questions like "what are the main themes?". Agentic RAG lets the model decide when, what and how many times to search, across several rounds. Corrective or self-checking RAG grades what came back and searches again, or says it doesn't know, when the results are weak.
+- **Engineer:** Basic: `ORDER BY similarity LIMIT 5`. Hybrid: a full-text index plus a vector index, results merged and re-sorted. Graph: precomputed joins and rollups over entities, built before any query arrives. Agentic: the service writes its own queries in a loop until it is satisfied. Corrective: a validation step that retries or fails closed on bad results.
+- **Everyone:** Five kinds of librarian. Basic brings the five books that sound most like your question. Hybrid also checks the index for your exact words, then sorts the pile best-first. Graph has already drawn a map of who and what is connected, so "what are the big themes?" works. Agentic keeps going back to the shelves with new searches. Corrective reads what it brought and goes back if it doesn't actually answer you.
+- **Where the analogy breaks:** A librarian understands the books. A retriever only matches text, and every type still hands the model words it did not write, so more steps mean more places a planted page can slip in.
+- **Read:** [From Local to Global: A Graph RAG Approach](https://arxiv.org/abs/2404.16130) (Edge et al., Microsoft Research, 2024)
 
 ## Prompt injection
 - **Stage:** 1

@@ -6,3 +6,6 @@ Icon?
 *.env
 *.pem
 *.key
+node_modules/
+.wrangler/
+.dev.vars

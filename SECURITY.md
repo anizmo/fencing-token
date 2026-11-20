@@ -13,3 +13,7 @@ Broken or outdated links that are not a security risk can go in a normal [issue]
 - Static HTML, CSS, and one small script for the checklist and filter. No cookies; checklist ticks are stored only in your browser.
 - Cookieless page-view counts via Cloudflare Web Analytics. No personal data, no ad trackers.
 - A Content Security Policy limits scripts to this site and Cloudflare's analytics beacon.
+
+## Fencing Token Live (fencingtoken.com/live)
+
+The live-session tool stores only answers, optional quiz nicknames and Q&A questions, with no accounts or cookies. Everything is deleted when the presenter ends the session, or automatically 24 hours after it starts. Details are in [live-server/README.md](live-server/README.md#security-and-privacy).

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Join · Fencing Token Live</title>
+<meta name="description" content="Join a live Fencing Token session: vote, answer, and ask questions from your phone. No sign-up.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src 'self' wss://*.workers.dev ws://localhost:8787; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0D1B2A">
+<meta property="og:title" content="Fencing Token Live">
+<meta property="og:description" content="Join the session from your phone. No sign-up.">
+<meta property="og:image" content="https://fencingtoken.com/assets/og-image.png">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="live.css">
+</head>
+<body>
+<div class="aud">
+  <header class="aud-top">
+    <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="19" width="30" height="3" rx="1.2" fill="#8A97A8"/><path fill="#8A97A8" d="M2 17.5 5 14.5 8 17.5V29H2Z"/><path fill="#6E7D92" d="M9.5 14 12.5 11 15.5 14V29h-6Z"/><path fill="#33445A" d="M17 10 20 7 23 10V29h-6Z"/><path fill="#F4A62A" d="M24.5 6 27.5 3 30.5 6V29h-6Z"/></svg>
+    <span class="wordmark">fencing <b>token</b> live</span>
+    <span class="code"><span id="dot" class="dot" aria-hidden="true"></span> <span id="code"></span></span>
+  </header>
+  <div id="banner" class="banner" role="status" hidden></div>
+  <main id="main" class="aud-main" aria-live="polite"></main>
+  <p class="foot">Anonymous · deleted within 24 hours · <a href="/">fencingtoken.com</a></p>
+  <nav id="tabs" class="tabs" hidden aria-label="Sections">
+    <button type="button" data-tab="live" aria-selected="true">Live</button>
+    <button type="button" data-tab="qa" aria-selected="false">Q&amp;A</button>
+  </nav>
+</div>
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="config.js"></script>
+<script src="common.js"></script>
+<script src="audience.js"></script>
+</body>
+</html>

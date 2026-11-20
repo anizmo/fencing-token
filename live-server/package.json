@@ -1,0 +1,12 @@
+{
+  "name": "fencingtoken-live",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --var ALLOWED_ORIGINS:http://localhost:8788 --var HOST_KEY:dev-key-0123456789abcdef0123456789abcdef --var MAX_PER_IP:5000",
+    "deploy": "wrangler deploy",
+    "loadtest": "node loadtest.js",
+    "check": "node check-session.js"
+  },
+  "devDependencies": { "wrangler": "^4", "ws": "^8" }
+}

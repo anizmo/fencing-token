@@ -1,0 +1,23 @@
+/* The Five Librarians */
+.fl-h { font: 700 26px/1.1 var(--display); margin: 0 0 12px; color: #fff; }
+.fl-meets { display: grid; gap: 8px; margin: 0 0 14px; }
+.fl-meet { display: flex; gap: 12px; align-items: center; background: var(--bg2); border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: 14px; padding: 10px 12px; }
+.fl-meet b { display: block; font: 700 17px var(--display); color: #fff; } .fl-meet span { font-size: 14px; color: var(--mist); }
+.fl-ic { flex: none; }
+.fl-lead { font: 500 12px var(--mono); color: #8F9CAE; text-transform: uppercase; letter-spacing: .06em; margin: 4px 0 6px; }
+.fl-steps { counter-reset: s; list-style: none; padding: 0; margin: 0 0 14px; display: grid; gap: 6px; }
+.fl-steps li { counter-increment: s; background: var(--card); color: var(--ink); border-radius: 12px; padding: 10px 12px 10px 42px; position: relative; font-weight: 600; font-size: 15px; }
+.fl-steps li::before { content: counter(s); position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; font: 700 12px/22px var(--display); text-align: center; }
+.fl-ask { font-size: 17px; margin: 0 0 14px; }
+.fl-opts { display: grid; gap: 8px; } .fl-opts.txt { gap: 10px; }
+.fl-opt { display: flex; align-items: center; gap: 12px; min-height: 52px; text-align: left; background: var(--bg2); border: 2px solid var(--line); border-radius: 14px; padding: 8px 12px; color: #E9EDF2; cursor: pointer; }
+.fl-opt:not(.txt) { border-left: 5px solid var(--c); }
+.fl-opt .fl-tx b { display: block; font: 700 16px var(--display); } .fl-opt .fl-tx span { font-size: 13px; color: var(--mist); }
+.fl-opt.txt .fl-tx b { font: 600 15px/1.35 var(--body); }
+.fl-letter { flex: none; width: 28px; height: 28px; border-radius: 8px; background: #1B2B40; display: grid; place-items: center; font: 700 14px var(--display); }
+.fl-opt:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+.fl-opt:disabled { cursor: default; opacity: .55; }
+.fl-opt.right { opacity: 1; border-color: var(--green); background: #12301F; }
+.fl-opt.close { opacity: 1; border-color: var(--amber); }
+.fl-opt.wrong { opacity: 1; border-color: var(--red); background: #2A1A22; }
+.fl-opt.right::after { content: "✓"; margin-left: auto; color: #6FD3A2; font-weight: 700; } .fl-opt.wrong::after { content: "✕"; margin-left: auto; color: #FF8A8D; font-weight: 700; } .fl-opt.close::after { content: "≈"; margin-left: auto; color: var(--amber); font-weight: 700; }

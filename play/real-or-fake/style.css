@@ -1,0 +1,43 @@
+/* Real or Fake?: only this game's styles (after ../arcade.css). */
+.rf { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.rf .stage { min-height: 230px; }
+.rf .card { gap: 12px; padding: 18px 18px 16px; }
+.rf .card.done { touch-action: pan-y; overflow-y: auto; }
+.rf-top { display: flex; align-items: center; gap: 8px; }
+.rf-kind { font: 600 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 5px 9px; border-radius: 8px; background: var(--ink); color: #F7C873; }
+.rf-rnd { margin-left: auto; font: 500 11px var(--mono); color: var(--ink3); letter-spacing: .04em; }
+.rf-say { display: flex; gap: 10px; align-items: flex-start; }
+.rf-bot { flex: none; position: relative; width: 38px; height: 38px; border-radius: 12px; background: var(--blue); display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 2px; }
+.rf-bot i { width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: rfblink 4s infinite; }
+@keyframes rfblink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.15); } }
+.rf-bubble { position: relative; flex: 1; min-width: 0; background: #fff; border: 1px solid #E2DED3; border-radius: 4px 16px 16px 16px; padding: 10px 13px 12px; box-shadow: 0 2px 0 #E8E5DC; }
+.rf-who { margin: 0 0 3px; font: 600 11px var(--mono); color: var(--ink3); letter-spacing: .06em; text-transform: uppercase; }
+.rf-who::after { content: " · very sure"; color: var(--green); }
+.rf-claim { margin: 0; font: 700 clamp(18px, 5.2vw, 21px)/1.3 var(--display); letter-spacing: -0.01em; color: var(--ink); }
+.rf .card.done .rf-claim { font-size: 16px; }
+.rf-cite { background: #EDEAE1; border-radius: 12px; padding: 9px 12px; }
+.rf-cite .lbl { margin-bottom: 5px; }
+.rf-link { font: 500 14px/1.35 var(--mono); color: var(--blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; word-break: break-word; }
+.rf-hint { border: 2px dashed var(--amber); background: #FFF6E3; border-radius: 12px; padding: 9px 12px; animation: up .25s ease; }
+.rf-hint .lbl { color: var(--amber-d); }
+.rf-hint p:last-child { margin: 0; font-size: 15px; font-weight: 600; color: var(--ink); }
+.rf .stamp { top: 16px; z-index: 2; background: rgba(247,246,242,.92); }
+.rf .stamp.rf-truth { transition: opacity .2s ease, transform .25s ease; transform: rotate(-12deg) scale(1.15); top: auto; bottom: 14px; }
+.rf .stamp.deny.rf-truth { transform: rotate(10deg) scale(1.15); }
+.rf-controls .ctl { font-size: 16px; }
+.rf-check { font-size: 14px !important; }
+.rf-check:disabled { opacity: .35; }
+.rf-streak { font: 600 12px var(--mono); color: var(--ink); background: var(--amber); padding: 4px 8px; border-radius: 999px; animation: rfpop .3s ease; }
+@keyframes rfpop { from { transform: scale(.6); } }
+.rf-verdict { margin: 12px 16px 14px; padding: 14px 14px 12px; border-radius: 16px; background: var(--bg2); border: 1px solid var(--line); border-left: 5px solid var(--green); animation: up .22s ease; max-height: 52vh; overflow-y: auto; }
+.rf-verdict.bad { border-left-color: var(--red); }
+.rf-v-big { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font: 700 20px/1.2 var(--display); color: #fff; }
+.rf-v-ic { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; background: var(--green); color: #fff; }
+.rf-verdict.bad .rf-v-ic { background: var(--red); }
+.rf-src { margin: 0 0 8px; color: #E9EDF2; font-size: 15px; }
+.rf-lesson { margin: 0 0 10px; color: var(--amber); font-size: 14px; font-weight: 600; }
+.rf-how { margin-bottom: 10px; }
+.rf-how summary { padding: 9px 0; font-size: 14px; }
+.rf-verdict .btn { min-height: 50px; }
+@media (max-height: 640px) { .rf .card { gap: 9px; padding: 14px 14px 12px; } .rf-claim { font-size: 17px; } .rf .controls { padding: 10px 16px 12px; } .rf .ctl { min-height: 56px; } }
+@media (prefers-reduced-motion: reduce) { .rf-bot i, .rf-streak, .rf-hint, .rf-verdict { animation: none; } }

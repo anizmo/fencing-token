@@ -1,0 +1,41 @@
+/* Downhill: the hill chart, readouts, step-size picker. */
+.dh { padding-bottom: 12px; }
+.dh-chart { background: var(--bg2); border: 1px solid var(--line); border-radius: 18px; padding: 6px 6px 2px; margin: 0 0 10px; }
+.dh-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.dh-svg .dh-grid { stroke: #1A2B40; stroke-width: 1; }
+.dh-svg .dh-axis { stroke: var(--line); stroke-width: 1.5; }
+.dh-svg .dh-curve { fill: none; stroke: var(--amber); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.dh-svg .dh-goal { fill: var(--green); opacity: .16; }
+.dh-svg .dh-flag line { stroke: #6FD3A2; stroke-width: 2; } .dh-svg .dh-flag path { fill: #6FD3A2; }
+.dh-svg .dh-lbl { font: 500 10px var(--mono); fill: #8F9CAE; letter-spacing: .04em; }
+.dh-svg .dh-ball circle { fill: #fff; stroke: var(--amber); stroke-width: 3; } .dh-svg .dh-ball circle.shine { fill: var(--amber); stroke: none; opacity: .5; }
+.dh-svg .dh-ball { filter: drop-shadow(0 3px 4px rgba(0,0,0,.5)); }
+.dh-svg .dh-trail circle { fill: #F7C873; }
+.dh-svg .dh-arrow line { stroke: #fff; stroke-width: 3; stroke-linecap: round; } .dh-svg .dh-arrow path { fill: #fff; }
+.dh-svg .dh-mark line { stroke: var(--red); stroke-width: 1.5; stroke-dasharray: 4 4; } .dh-svg .dh-mark text { font: 600 10px var(--mono); fill: #FF8A8D; }
+.dh-svg.dh-boom { animation: dhboom .26s; }
+@keyframes dhboom { 0% { filter: none; } 30% { filter: drop-shadow(0 0 14px rgba(229,72,77,.9)); transform: translateX(-6px); } 60% { transform: translateX(5px); } 100% { filter: none; transform: none; } }
+.dh-stats { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: stretch; margin: 0 0 8px; }
+.dh-m { background: var(--card); color: var(--ink); border-radius: 14px; padding: 8px 14px; min-width: 104px; display: flex; flex-direction: column; justify-content: center; }
+.dh-m b { font: 700 32px/1 var(--display); letter-spacing: -0.03em; }
+.dh-m span { font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); }
+.dh-m .dh-delta { min-height: 14px; font-weight: 600; text-transform: none; letter-spacing: 0; }
+.dh-delta.down { color: #14593B; } .dh-delta.up { color: #B3262B; }
+.dh-read { margin: 0; background: var(--bg2); border: 1px solid var(--line); border-radius: 14px; padding: 8px 12px; display: flex; flex-direction: column; justify-content: center; gap: 1px; min-height: 76px; }
+.dh-read .dh-batch { font: 500 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #8F9CAE; }
+.dh-read b { font: 700 22px/1.1 var(--display); color: #fff; }
+.dh-read .dh-calc { font: 500 13px var(--mono); color: #F7C873; }
+.dh-say { margin: 0 0 10px; min-height: 42px; font-size: 15px; color: var(--mist); padding: 8px 12px; border-radius: 12px; border-left: 4px solid var(--line); background: rgba(16,30,48,.6); }
+.dh-say.good { border-left-color: var(--green); color: #BFEBD5; } .dh-say.bad { border-left-color: var(--red); color: #FFC9CB; }
+.dh-controls { display: grid; gap: 10px; }
+.dh-sizes { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.dh-size { min-height: 56px; border-radius: 12px; border: 2px solid var(--line); background: var(--bg2); padding: 4px 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.dh-size .n { font: 700 14px var(--display); } .dh-size .lr { font: 500 11px var(--mono); color: #8F9CAE; }
+.dh-size[aria-pressed="true"] { background: var(--amber); border-color: var(--amber); color: var(--ink); } .dh-size[aria-pressed="true"] .lr { color: var(--amber-d); }
+.dh-size:disabled { opacity: .55; }
+.dh-acts { display: grid; grid-template-columns: auto 1fr; gap: 8px; } .dh-acts.three { grid-template-columns: auto 1fr 1fr; }
+.dh-stop { min-height: 54px; border-radius: 14px; border: 1px solid var(--line); background: transparent; color: #8F9CAE; font: 600 14px var(--body); padding: 0 12px; }
+.dh-skip { border-color: #5A2A30; color: #FFB3B5; }
+.dh .feedback { margin-top: 0; }
+@media (max-width: 370px) { .dh-size .n { font-size: 12px; } .dh-m b { font-size: 28px; } .dh-m { min-width: 92px; } }
+@media (prefers-reduced-motion: reduce) { .dh-svg.dh-boom { animation: none; } }

@@ -1,0 +1,79 @@
+/* Open Book: only this game's styles (loaded after ../arcade.css). Every class is prefixed ob-. */
+.ob .hud { padding: 4px 0 8px; }
+
+/* the student's question */
+.ob-ask { background: var(--card); color: var(--ink); border-radius: 18px; padding: 14px 16px 16px; margin: 0 0 12px; position: relative; }
+.ob-ask .ob-who { display: flex; align-items: center; gap: 8px; font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink3); margin: 0 0 8px; }
+.ob-ask .ob-who i { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+.ob-ask .ob-q { font: 700 21px/1.25 var(--display); letter-spacing: -0.01em; margin: 0; }
+.ob-ask.ob-mini { padding: 10px 14px; } .ob-ask.ob-mini .ob-q { font-size: 17px; }
+
+/* the pile of chunks */
+.ob-pilehead { display: flex; align-items: baseline; gap: 8px; margin: 2px 0 8px; }
+.ob-pilehead .kicker { margin: 0; }
+.ob-pilehead span { margin-left: auto; font-size: 12px; color: #8F9CAE; }
+.ob-pile { display: flex; flex-direction: column; gap: 10px; margin: 0 0 12px; perspective: 900px; }
+.ob-chunk { position: relative; display: block; width: 100%; text-align: left; border: 0; border-radius: 14px; padding: 11px 14px 10px; background: var(--card); color: var(--ink);
+  box-shadow: 0 1px 0 #D9D5C8, 0 3px 0 -1px #E4E0D4, 0 6px 0 -2px #CFCABB, 0 12px 22px -14px rgba(0,0,0,.7); transform-style: preserve-3d;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease; animation: obDeal .42s cubic-bezier(.2,.8,.3,1.1) backwards; }
+.ob-chunk:nth-child(odd) { transform: rotate(-.5deg); } .ob-chunk:nth-child(even) { transform: rotate(.45deg); }
+.ob-chunk:nth-child(2) { animation-delay: .07s; } .ob-chunk:nth-child(3) { animation-delay: .14s; } .ob-chunk:nth-child(4) { animation-delay: .21s; } .ob-chunk:nth-child(5) { animation-delay: .28s; }
+@keyframes obDeal { from { opacity: 0; transform: translateY(-40px) rotate(-4deg) scale(.96); } }
+.ob-chunk .ob-top { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; }
+.ob-src { font: 500 11px/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink3); }
+.ob-wc { margin-left: auto; flex: none; font: 500 11px var(--mono); color: var(--ink2); background: #E8E5DC; border-radius: 999px; padding: 3px 8px; }
+.ob-txt { display: block; font: 600 15px/1.4 var(--body); }
+.ob-hide { display: block; margin-top: 4px; font: 400 10.5px/1.35 var(--body); color: #A9A69C; font-style: italic; }
+.ob-foot { display: flex; align-items: center; gap: 6px; margin-top: 8px; font: 700 13px var(--display); color: var(--amber-d); }
+.ob-foot .ob-plus { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; border: 2px solid currentColor; font-size: 15px; line-height: 1; }
+.ob-chunk[aria-pressed="true"] { background: #FFF1D6; transform: translateX(6px) rotate(0deg); box-shadow: 0 0 0 3px var(--amber), 0 12px 22px -14px rgba(0,0,0,.7); }
+.ob-chunk[aria-pressed="true"] .ob-foot { color: #14593B; }
+.ob-chunk[aria-pressed="true"] .ob-plus { background: var(--green); border-color: var(--green); color: #fff; font: 700 12px var(--display); }
+.ob-chunk.ob-flip { animation: obFlip .34s ease; }
+@keyframes obFlip { 0% { transform: rotateY(0); } 50% { transform: rotateY(88deg) scale(.97); } 100% { transform: rotateY(0); } }
+.ob-chunk.ob-nope { animation: shake .35s; box-shadow: 0 0 0 3px var(--red), 0 12px 22px -14px rgba(0,0,0,.7); }
+.ob-chunk:disabled { cursor: default; }
+
+/* the dock: the model's open book (word budget) + the hand-over button */
+.ob-dock { position: sticky; bottom: 0; margin: auto -20px -18px; padding: 10px 20px 16px; background: linear-gradient(to bottom, rgba(11,22,36,0), var(--bg) 18px); z-index: 2; }
+.ob-book { background: var(--bg2); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; margin: 0 0 10px; }
+.ob-bookhead { display: flex; align-items: baseline; gap: 8px; font-size: 13px; color: var(--mist); margin: 0 0 7px; }
+.ob-bookhead b { font: 700 14px var(--display); color: #fff; }
+.ob-bookhead .ob-count { margin-left: auto; font: 500 13px var(--mono); color: #fff; }
+.ob-bar { position: relative; height: 12px; border-radius: 6px; background: #0B1624; border: 1px solid var(--line); overflow: hidden; display: flex; }
+.ob-seg { height: 100%; background: var(--amber); border-right: 2px solid #0B1624; transition: width .3s ease; display: block; }
+.ob-seg:nth-child(2n) { background: #F7C873; }
+.ob-bar.ob-full .ob-seg { background: var(--green); } .ob-bar.ob-full .ob-seg:nth-child(2n) { background: #6FD3A2; }
+.ob-bar.ob-over { animation: shake .35s; border-color: var(--red); }
+.ob-bar.ob-over::after { content: ""; position: absolute; inset: 0; background: rgba(229,72,77,.45); }
+
+/* the answer */
+.ob-read { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 6px; }
+.ob-read li { display: flex; gap: 10px; align-items: flex-start; background: var(--bg2); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; font-size: 13px; color: var(--mist); animation: obIn .4s ease backwards; }
+.ob-read li:nth-child(2) { animation-delay: .12s; } .ob-read li:nth-child(3) { animation-delay: .24s; } .ob-read li:nth-child(4) { animation-delay: .36s; }
+@keyframes obIn { from { opacity: 0; transform: rotateX(80deg); } }
+.ob-read .ob-n { flex: none; width: 24px; height: 24px; border-radius: 7px; background: var(--card); color: var(--ink); display: grid; place-items: center; font: 700 13px var(--display); }
+.ob-read b { display: block; color: #fff; font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
+.ob-read li.ob-bad { border-color: var(--red); background: #2A1519; }
+.ob-read li.ob-bad .ob-hide { color: #FF9A9D; font-size: 12px; font-style: italic; }
+.ob-read li.ob-old { border-color: #8A5606; }
+.ob-reply { position: relative; background: #13263C; border: 1px solid #2B4766; border-radius: 4px 18px 18px 18px; padding: 12px 14px 14px; margin: 0 0 12px; }
+.ob-reply .ob-who { display: flex; align-items: center; gap: 8px; font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8FB3DA; margin: 0 0 8px; }
+.ob-reply .ob-who i { width: 18px; height: 18px; border-radius: 6px; background: linear-gradient(135deg, #5B8DEF, #A78BFA); }
+.ob-say { margin: 0; font: 500 16px/1.45 var(--body); color: #fff; min-height: 2.9em; }
+.ob-say .ob-cite { font: 700 12px var(--mono); color: #F7C873; }
+.ob-stamp { position: absolute; right: 12px; top: 9px; font: 700 13px var(--display); letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; border: 2px solid; border-radius: 8px; transform: rotate(-4deg); animation: obStamp .3s ease .1s backwards; }
+@keyframes obStamp { from { opacity: 0; transform: scale(1.8) rotate(-4deg); } }
+.ob-stamp.ob-right { color: #6FD3A2; } .ob-stamp.ob-partial, .ob-stamp.ob-clash { color: #F7C873; } .ob-stamp.ob-wrong, .ob-stamp.ob-hijack { color: #FF8A8D; } .ob-stamp.ob-idk { color: var(--mist); }
+.ob-reply.ob-hijack { background: #2A1519; border-color: var(--red); }
+.ob-reply.ob-hijack .ob-say { color: #FFD0D1; }
+.ob-reply.ob-right { border-color: #1F6B48; }
+.ob-fb .feedback { margin-top: 0; }
+.ob-fb .ob-good { border-color: #1F6B48; } .ob-fb .ob-badfb { border-color: #6B2A2D; }
+.ob-best { font-size: 13px; color: #8F9CAE; margin: 0 0 10px; }
+.ob-best b { color: #E9EDF2; font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-chunk, .ob-chunk.ob-flip, .ob-chunk.ob-nope, .ob-read li, .ob-stamp, .ob-bar.ob-over { animation: none; }
+  .ob-chunk, .ob-seg { transition: none; }
+}

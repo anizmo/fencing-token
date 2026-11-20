@@ -1,0 +1,38 @@
+/* Cheat This Leaderboard: the hacker console, fence cards and the device-vs-server reveal. */
+.cht .timer { margin: 0 0 10px; }
+.cht-term { position: relative; background: #050C14; border: 1px solid #1C3A2C; border-radius: 16px; padding: 0 14px 12px; margin: 0 0 6px; box-shadow: 0 14px 30px -16px rgba(0,0,0,.8), inset 0 0 40px rgba(34,160,107,.06); overflow: hidden; }
+.cht-term::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px); }
+.cht-bar { display: flex; align-items: center; gap: 6px; padding: 9px 0 8px; margin: 0 -14px 8px; padding-left: 12px; border-bottom: 1px solid #122230; background: #0A1622; }
+.cht-bar i { width: 10px; height: 10px; border-radius: 50%; background: #E5484D; } .cht-bar i:nth-child(2) { background: #F4A62A; } .cht-bar i:nth-child(3) { background: #22A06B; }
+.cht-bar span { margin-left: 6px; font: 500 11px var(--mono); color: #6F8296; letter-spacing: .04em; }
+.cht-l { margin: 0 0 4px; font: 500 14px/1.45 var(--mono); color: #9FE8B8; overflow-wrap: anywhere; }
+.cht-l .p { color: var(--amber); }
+.cht-l.cm { color: #6F8296; } .cht-l.cm:first-of-type { color: #C3CCD8; font-weight: 500; }
+.cht-l.ok { color: #7FE0B0; } .cht-l.bad { color: #FF9A9D; }
+.cht-l.type { animation: cht-type .55s steps(28, end) both; }
+.cht-l.d1 { animation-delay: .35s; } .cht-l.d2 { animation-delay: .7s; }
+@keyframes cht-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.cht-caret { display: inline-block; width: 9px; height: 16px; background: #9FE8B8; vertical-align: middle; animation: cht-blink 1s steps(1) infinite; }
+@keyframes cht-blink { 50% { opacity: 0; } }
+.cht-resp { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #1C3A2C; animation: up .25s ease; }
+.cht-tag { display: inline-block; font: 500 10.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: #8F9CAE; border: 1px solid #22344A; border-radius: 6px; padding: 2px 6px; margin-bottom: 6px; }
+.cht-tag.live { color: #0D1B2A; background: var(--amber); border-color: var(--amber); }
+.cht-sent { display: block; font: 500 12px var(--mono); color: #6F8296; margin-bottom: 3px; }
+.cht-q { margin: 14px 0 8px; }
+.cht-opts { display: grid; gap: 8px; }
+.cht-opt { display: flex; align-items: center; gap: 12px; min-height: 58px; width: 100%; text-align: left; padding: 9px 12px; border-radius: 14px; border: 2px solid var(--line); background: var(--bg2); color: #E9EDF2; transition: border-color .15s, transform .1s; }
+.cht-opt:active { transform: scale(.98); }
+.cht-g { flex: none; width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: #1A2C42; color: var(--amber); font: 700 15px var(--mono); }
+.cht-tx { flex: 1; min-width: 0; } .cht-tx b { display: block; font: 700 16px/1.2 var(--display); } .cht-tx span { display: block; font-size: 13px; color: #8F9CAE; margin-top: 2px; }
+.cht-opt:disabled { cursor: default; opacity: .55; }
+.cht-opt.right { opacity: 1; border-color: var(--green); background: #10291E; } .cht-opt.right .cht-g { background: var(--green); color: #fff; }
+.cht-opt.wrong { opacity: 1; border-color: var(--red); background: #2A1417; animation: shake .35s; } .cht-opt.wrong .cht-g { background: var(--red); color: #fff; }
+.cht-opt.right .cht-tx b::after { content: " ✓"; color: #7FE0B0; } .cht-opt.wrong .cht-tx b::after { content: " ✕"; color: #FF9A9D; }
+.cht .feedback.ok { border-color: #1E5A3E; } .cht .feedback.bad { border-color: #6A2A2E; }
+.cht-two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 10px; }
+.cht-side { border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; }
+.cht-side b { font: 700 14px var(--display); color: #fff; }
+.cht-side.you { background: #2A2310; border: 1px solid #5A4614; color: #F7C873; }
+.cht-side.srv { background: #0F2A1E; border: 1px solid #1E5A3E; color: #8FCBAE; }
+.cht-same { font: 700 18px var(--display); color: #7FE0B0; }
+@media (prefers-reduced-motion: reduce) { .cht-l.type, .cht-caret, .cht-opt.wrong { animation: none; } }
